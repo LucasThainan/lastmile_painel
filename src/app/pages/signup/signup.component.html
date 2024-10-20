@@ -1,1 +1,49 @@
-<p>signup works!</p>
+<section class="signup">
+  <div class="signup-wrapper">
+    <div class="form-wrapper center-div">
+      <div class="form-title">
+        <h2>Cadastro</h2>
+      </div>
+      <form [formGroup]="signupForm">
+        <div class="input-wrap">
+          <label for="name">Nome</label>
+          <input type="text" id="name" formControlName="name"
+            [class.invalid]="signupForm.get('name')?.invalid && signupForm.get('name')?.touched">
+        </div>
+        <div class="input-wrap">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email"
+            [class.invalid]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+        </div>
+        <div class="input-wrap">
+          <label for="password">Senha</label>
+          <input type="password" id="password" formControlName="password"
+            [class.invalid]="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+        </div>
+        <div class="input-wrap">
+          <label for="password_confirm">Confirmar Senha</label>
+          <input type="password" id="password_confirm" formControlName="password_confirm"
+            [class.invalid]="signupForm.get('password_confirm')?.invalid && signupForm.get('password_confirm')?.touched">
+        </div>
+        <div class="input-wrap">
+          <label for="document">CPF/CNPJ</label>
+          <input type="text" id="document" formControlName="document"
+            [class.invalid]="signupForm.get('document')?.invalid && signupForm.get('document')?.touched">
+        </div>
+        <div class="input-wrap">
+          <label for="phone">Telefone/Celular</label>
+          <input type="text" id="phone" formControlName="phone"
+            [class.invalid]="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched">
+        </div>
+        <div class="submit-wrap">
+          <button type="button" (click)="onSignupSubmit()" [disabled]="signupForm.invalid">Registrar</button>
+          <a [routerLink]="'/login'">Já possuo conta</a>
+        </div>
+        <div class="details-wrap" *ngIf="isLoading || error">
+          <app-loader *ngIf="isLoading" />
+          <p *ngIf="error">{{ error }}</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

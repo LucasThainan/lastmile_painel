@@ -27,7 +27,7 @@ export class UserService {
     return this.requestService.postRequest(`${this.apiUrl}usuarios/refresh-token`, data)
   }
 
-  createUser(data: User): Observable<ResponseLogin> {
+  createUser(data: Partial<User>): Observable<ResponseLogin> {
     return this.requestService.postRequest(`${this.apiUrl}usuarios`, data)
   }
 
