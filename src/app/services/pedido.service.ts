@@ -1,0 +1,38 @@
+import { Injectable } from '@angular/core'
+import { Observable } from 'rxjs'
+import {
+  Pedido,
+  ParamsPedido,
+  ResponseGetPedidos,
+  ResponseGetPedido,
+  AssignEntregador
+} from '../models/pedido.model'
+import { RequestService } from './request.service'
+import { environment } from '../../environments/environments'
+
+@Injectable({ providedIn: 'root' })
+export class PedidoService {
+  apiUrl = environment.apiUrl
+
+  constructor(private requestService: RequestService) { }
+
+  createPedido(data: Pedido): Observable<ResponseGetPedido> {
+    return this.requestService.postRequest(`${this.apiUrl}pedidos`, data)
+  }
+
+  getPedidos(data: ParamsPedido): Observable<ResponseGetPedidos> {
+    return this.requestService.getRequest(`${this.apiUrl}pedidos`, data)
+  }
+
+  getPedidoID(id: string): Observable<ResponseGetPedido> {
+    return this.requestService.getRequest(`${this.apiUrl}pedidos/${id}`, {})
+  }
+
+  updatePedidos(data: Partial<Pedido>): Observable<ResponseGetPedido> {
+    return this.requestService.patchRequest(`${this.apiUrl}pedidos`, data)
+  }
+
+  AssignEntregador(id: string, data: AssignEntregador): Observable<ResponseGetPedido> {
+    return this.requestService.patchRequest(`${this.apiUrl}pedidos/${id}`, data)
+  }
+}
