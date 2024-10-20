@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import {
   User,
+  Login,
+  RefreshToken,
   ParamsUsers,
   ResponseLogin,
   ResponseRefreshToken,
@@ -17,11 +19,11 @@ export class UserService {
 
   constructor(private requestService: RequestService) { }
 
-  login(data: User): Observable<ResponseLogin> {
+  login(data: Login): Observable<ResponseLogin> {
     return this.requestService.postRequest(`${this.apiUrl}usuarios/login`, data)
   }
 
-  refreshToken(data: User): Observable<ResponseRefreshToken> {
+  refreshToken(data: RefreshToken): Observable<ResponseRefreshToken> {
     return this.requestService.postRequest(`${this.apiUrl}usuarios/refresh-token`, data)
   }
 

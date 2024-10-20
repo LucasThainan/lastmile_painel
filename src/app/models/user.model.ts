@@ -14,6 +14,15 @@ export interface User {
   entregador?: Partial<Entregador>
 }
 
+export interface Login {
+  email: string
+  password: string
+}
+
+export interface RefreshToken {
+  refresh_token: string
+}
+
 export interface ParamsUsers {
   limit?: number
   offset?: number
@@ -21,7 +30,7 @@ export interface ParamsUsers {
 }
 
 export interface ResponseLogin {
-  user: User
+  user_data: User
   access_token: string
   refresh_token: string
 }

@@ -4,7 +4,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: v.$white-color;
+  color: v.$text-color;
   font-family: v.$montserrat;
 }
 
@@ -18,7 +18,11 @@ body {
 }
 
 body {
-  background-color: v.$background-color;
+  background: linear-gradient(125deg,
+      rgba($color: v.$background-color, $alpha: 0),
+      rgba($color: v.$background-color, $alpha: .7) 15%,
+      rgba($color: v.$gray-color, $alpha: 1) 100%,
+    );
 }
 
 a {
