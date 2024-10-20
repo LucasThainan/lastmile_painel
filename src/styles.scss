@@ -1,1 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'app/utils/variables' as v;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: v.$white-color;
+  font-family: v.$montserrat;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: v.$background-color;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  user-select: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+.center-div {
+  max-width: 1310px;
+  width: 100%;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, .3);
+  border: 4px solid transparent;
+  border-radius: 100px;
+
+  &:hover {
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, .6);
+  }
+}

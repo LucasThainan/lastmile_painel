@@ -2,9 +2,10 @@ import { Component } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-layout',
   standalone: true,
   imports: [RouterOutlet],
-  template: '<router-outlet />',
+  templateUrl: './layout.component.html',
+  styleUrl: './layout.component.scss'
 })
-export class AppComponent { title = 'lastmile_painel' }
+export class LayoutComponent { }
