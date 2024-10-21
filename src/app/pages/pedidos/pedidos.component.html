@@ -34,7 +34,7 @@
                 </span>
               </td>
               <td>
-                <button [disabled]="item.status_pedido !== 1" (click)="cancelarPedido(item)">
+                <button [disabled]="item.status_pedido !== 1" (click)="openModalConfirm(item)">
                   cancelar pedido
                 </button>
               </td>
@@ -48,19 +48,21 @@
       <div class="paginator">
         <span>
           {{ total > 0 ? offset + 1 : '0' }} -
-          {{ total < offset + 10 ? total : offset + 10 }}
-          de {{ total }}
-        </span>
+          {{ total < offset + 10 ? total : offset + 10 }} de {{ total }} </span>
 
-        <button (click)="previousPage()" [disabled]="currentPage <= 1">
-          <i class="fa-solid fa-chevron-left"></i>
-        </button>
+            <button (click)="previousPage()" [disabled]="currentPage <= 1">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
 
-        <button (click)="nextPage()" [disabled]="currentPage >= totalPages">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
+            <button (click)="nextPage()" [disabled]="currentPage >= totalPages">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
       </div>
     </div>
   </div>
 </section>
-<app-create-pedido *ngIf="showModalPedido" (close)="closeModal($event)" />
+<app-create-pedido *ngIf="showModalPedido" (close)="closeModalPedido($event)" />
+<app-confirm-message *ngIf="showModalConfirm" [object]="{
+  title: 'Cancelar Pedido',
+  message: 'Deseja cancelar o pedido?',
+}" (close)="closeModalConfirm($event)" />

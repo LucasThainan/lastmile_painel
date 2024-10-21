@@ -1,0 +1,105 @@
+@use '../../utils/variables' as v;
+
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  background: v.$black-color;
+  position: fixed;
+  left: 0;
+  top: 0;
+  opacity: .5;
+  z-index: 10;
+}
+
+.modal {
+  width: 600px;
+  padding: 24px;
+  border-radius: 8px;
+  background: v.$background-color;
+  box-shadow: 0 2px 8px -2px v.$black-color;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 11;
+}
+
+.header {
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  button {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background-color: transparent;
+
+    i {
+      font-size: 25px;
+    }
+  }
+}
+
+.body-wrapper {
+  min-height: 80px;
+  margin-top: 16px;
+}
+
+.submit-wrap {
+  width: 100%;
+  margin-top: 8px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 24px;
+
+  button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: v.$success-color;
+    font-weight: 700;
+    font-size: 24px;
+    color: v.$white-color;
+    transition: all 150ms ease;
+
+    &.cancel {
+      background-color: v.$warning-color;
+    }
+
+    &:hover {
+      scale: 1.01;
+    }
+
+    &:active {
+      scale: .99;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .modal {
+    width: min-content;
+  }
+}
+
+@media (max-width: 430px) {
+  .modal {
+    width: calc(100% - 16px);
+    left: 8px;
+    top: 150px;
+    transform: translate(0, 0);
+  }
+
+  .submit-wrap {
+    display: flex;
+    flex-direction: column-reverse;
+
+    button {
+      width: 100%;
+    }
+  }
+}

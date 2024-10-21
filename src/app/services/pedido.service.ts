@@ -28,8 +28,8 @@ export class PedidoService {
     return this.requestService.getRequest(`${this.apiUrl}pedidos/${id}`, {})
   }
 
-  updatePedidos(data: Partial<Pedido>): Observable<ResponseGetPedido> {
-    return this.requestService.patchRequest(`${this.apiUrl}pedidos`, data)
+  updatePedidos(id: string, data: Partial<Pedido>): Observable<ResponseGetPedido> {
+    return this.requestService.patchRequest(`${this.apiUrl}pedidos/${id}`, data)
   }
 
   AssignEntregador(id: string, data: AssignEntregador): Observable<ResponseGetPedido> {

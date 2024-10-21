@@ -28,7 +28,7 @@ export class UserService {
     return this.requestService.getRequest(`${this.base_url}usuarios/${id}`, {})
   }
 
-  updateUsers(data: Partial<User>): Observable<ResponseGetUser> {
-    return this.requestService.patchRequest(`${this.base_url}usuarios`, data)
+  updateUsers(id: string, data: Partial<User>): Observable<ResponseGetUser> {
+    return this.requestService.patchRequest(`${this.base_url}usuarios/${id}`, data)
   }
 }

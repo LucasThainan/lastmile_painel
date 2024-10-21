@@ -27,12 +27,12 @@
         </div>
         <div class="input-wrap">
           <label for="document">CPF/CNPJ</label>
-          <input type="text" id="document" formControlName="document"
+          <input type="text" id="document" formControlName="document" mask="000.000.000-00 || 00.000.000/0000-00"
             [class.invalid]="signupForm.get('document')?.invalid && signupForm.get('document')?.touched">
         </div>
         <div class="input-wrap">
           <label for="phone">Telefone/Celular</label>
-          <input type="text" id="phone" formControlName="phone"
+          <input type="text" id="phone" formControlName="phone" mask="00 0000-0000||00 00000-0000"
             [class.invalid]="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched">
         </div>
         <div class="submit-wrap">

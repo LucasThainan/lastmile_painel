@@ -1,0 +1,16 @@
+<div class="overlay" (click)="closeModal()"></div>
+<div class="modal">
+  <div class="header">
+    <h2>{{ object.title || 'Confirmação' }}</h2>
+    <button (click)="closeModal()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <div class="body-wrapper">
+    <p>{{ object.message || 'Deseja confirmar?' }}</p>
+  </div>
+  <div class="submit-wrap">
+    <button class="cancel" (click)="closeModal()">Cancelar</button>
+    <button (click)="closeModal(true)">Confirmar</button>
+  </div>
+</div>

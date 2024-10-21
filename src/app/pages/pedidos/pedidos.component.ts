@@ -5,16 +5,19 @@ import { User } from '../../models/user.model'
 import { Security } from '../../utils/security.utils'
 import { StatusPedidoEnum } from '../../enums/status-pedido.enum'
 import { CreatePedidoComponent } from "../../modals/create-pedido/create-pedido.component"
+import { ConfirmMessageComponent } from "../../modals/confirm-message/confirm-message.component";
+import { Pedido } from '../../models/pedido.model'
 
 @Component({
   selector: 'app-pedidos',
   standalone: true,
-  imports: [CommonModule, CreatePedidoComponent],
+  imports: [CommonModule, CreatePedidoComponent, ConfirmMessageComponent],
   templateUrl: './pedidos.component.html',
   styleUrl: './pedidos.component.scss'
 })
 export class PedidosComponent {
   pedidos: any[] = []
+  selectedPedido!: Pedido | null
   user!: User
 
   offset: number = 0
@@ -24,6 +27,7 @@ export class PedidosComponent {
   total: number = 0
 
   showModalPedido: boolean = false
+  showModalConfirm: boolean = false
 
   constructor(private readonly pedidoService: PedidoService) { }
 
@@ -53,10 +57,15 @@ export class PedidosComponent {
     return StatusPedidoEnum[status]
   }
 
-  cancelarPedido(pedido: any) {
-    if (pedido.status_pedido !== StatusPedidoEnum.Pendente) return
+  cancelarPedido() {
+    if (!this.selectedPedido) return
 
+    const data = { status_pedido: StatusPedidoEnum.Cancelado }
     
+    this.pedidoService.updatePedidos(this.selectedPedido.id_pedido, data).subscribe({
+      next: () => this.getPedidos(),
+      error: (err) => console.log(err)
+    })
   }
 
   previousPage() {
@@ -79,8 +88,20 @@ export class PedidosComponent {
     this.showModalPedido = true
   }
 
-  closeModal(event: any) {
+  closeModalPedido(event: any) {
     if (event) this.getPedidos()
     this.showModalPedido = false
+  }
+
+  openModalConfirm(pedido: Pedido) {
+    if (pedido.status_pedido !== StatusPedidoEnum.Pendente) return
+
+    this.showModalConfirm = true
+    this.selectedPedido = pedido
+  }
+
+  closeModalConfirm(event: any) {
+    if (event) this.cancelarPedido()
+    this.showModalConfirm = false
   }
 }
