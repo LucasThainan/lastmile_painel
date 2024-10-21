@@ -16,7 +16,7 @@ export class UserService {
 
   constructor(private requestService: RequestService) { }
 
-  createUser(data: Partial<User>): Observable<ResponseLogin> {
+  createUser(data: Omit<User, 'id_usuario'>): Observable<ResponseLogin> {
     return this.requestService.postRequest(`${this.base_url}usuarios`, data)
   }
 

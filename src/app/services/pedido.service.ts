@@ -16,7 +16,7 @@ export class PedidoService {
 
   constructor(private requestService: RequestService) { }
 
-  createPedido(data: Pedido): Observable<ResponseGetPedido> {
+  createPedido(data: Omit<Pedido, 'id_pedido'>): Observable<ResponseGetPedido> {
     return this.requestService.postRequest(`${this.apiUrl}pedidos`, data)
   }
 

@@ -4,11 +4,12 @@ import { PedidoService } from '../../services'
 import { User } from '../../models/user.model'
 import { Security } from '../../utils/security.utils'
 import { StatusPedidoEnum } from '../../enums/status-pedido.enum'
+import { CreatePedidoComponent } from "../../modals/create-pedido/create-pedido.component"
 
 @Component({
   selector: 'app-pedidos',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CreatePedidoComponent],
   templateUrl: './pedidos.component.html',
   styleUrl: './pedidos.component.scss'
 })
@@ -21,6 +22,8 @@ export class PedidosComponent {
   currentPage: number = 1
   totalPages: number = 0
   total: number = 0
+
+  showModalPedido: boolean = false
 
   constructor(private readonly pedidoService: PedidoService) { }
 
@@ -51,7 +54,9 @@ export class PedidosComponent {
   }
 
   cancelarPedido(pedido: any) {
+    if (pedido.status_pedido !== StatusPedidoEnum.Pendente) return
 
+    
   }
 
   previousPage() {
@@ -68,5 +73,14 @@ export class PedidosComponent {
     this.currentPage++
     this.offset = (this.currentPage - 1) * 10
     this.getPedidos()
+  }
+
+  openModalPedido() {
+    this.showModalPedido = true
+  }
+
+  closeModal(event: any) {
+    if (event) this.getPedidos()
+    this.showModalPedido = false
   }
 }

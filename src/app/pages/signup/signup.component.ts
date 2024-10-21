@@ -46,7 +46,7 @@ export class SignupComponent {
     }
     this.error = ''
 
-    const data: Partial<User> = {
+    const data: Omit<User, 'id_usuario'> = {
       name: this.signupForm.controls['name'].value,
       email: this.signupForm.controls['email'].value,
       password: this.signupForm.controls['password'].value,
@@ -59,8 +59,6 @@ export class SignupComponent {
     this.userService.createUser(data).subscribe({
       next: (res: any) => {
         this.isLoading = false
-
-        console.log(res)
         this.setUser(res.user_data, res.access_token, res.refresh_token)
       },
       error: (err: any) => {

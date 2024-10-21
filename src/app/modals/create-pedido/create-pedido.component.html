@@ -1,0 +1,64 @@
+<div class="overlay" (click)="closeModal()"></div>
+<div class="modal">
+  <div class="header">
+    <h2>Criar Pedido</h2>
+    <button (click)="closeModal()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <div class="form-wrapper">
+    <form [formGroup]="pedidoForm">
+      <div class="input-wrap">
+        <label for="name">Nome<span>*</span></label>
+        <input type="text" id="name" formControlName="name"
+          [class.invalid]="pedidoForm.get('name')?.invalid && pedidoForm.get('name')?.touched">
+      </div>
+      <div class="input-wrap">
+        <label for="description">Descrição<span>*</span></label>
+        <input type="text" id="description" formControlName="description"
+          [class.invalid]="pedidoForm.get('description')?.invalid && pedidoForm.get('description')?.touched">
+      </div>
+      <div class="input-wrap">
+        <label for="comments">Comentário</label>
+        <input type="text" id="comments" formControlName="comments">
+      </div>
+      <div class="input-wrap">
+        <label for="postal_code">CEP<span>*</span></label>
+        <input type="text" id="postal_code" formControlName="postal_code" (input)="buscarCep()" mask="00000-000"
+          [class.invalid]="pedidoForm.get('postal_code')?.invalid && pedidoForm.get('postal_code')?.touched">
+      </div>
+      <div class="input-wrap">
+        <label for="address">Endereço<span>*</span></label>
+        <input type="text" id="address" formControlName="address"
+          [class.invalid]="pedidoForm.get('address')?.invalid && pedidoForm.get('address')?.touched">
+      </div>
+      <div class="input-wrap">
+        <label for="number">Número<span>*</span></label>
+        <input type="number" id="number" formControlName="number" 
+          [class.invalid]="pedidoForm.get('number')?.invalid && pedidoForm.get('number')?.touched">
+      </div>
+      <div class="input-wrap">
+        <label for="city">Cidade<span>*</span></label>
+        <input type="text" id="city" formControlName="city"
+          [class.invalid]="pedidoForm.get('city')?.invalid && pedidoForm.get('city')?.touched">
+      </div>
+      <div class="input-wrap">
+        <label for="state">Estado/UF<span>*</span></label>
+        <input type="text" id="state" formControlName="state" mask="SS"
+          [class.invalid]="pedidoForm.get('state')?.invalid && pedidoForm.get('state')?.touched"
+          (input)="onInputUF($event)">
+      </div>
+      <div class="submit-wrap">
+        <button type="button" (click)="closeModal()" [disabled]="isLoading">Cancelar</button>
+        <button type="submit" (click)="onPedidoSubmit()" [disabled]="pedidoForm.invalid || isLoading"
+          [class.loading]="isLoading">
+          <app-loader *ngIf="isLoading" />
+          <span *ngIf="!isLoading">Registrar</span>
+        </button>
+      </div>
+      <div class="details-wrap" *ngIf="error">
+        <p>{{ error }}</p>
+      </div>
+    </form>
+  </div>
+</div>
