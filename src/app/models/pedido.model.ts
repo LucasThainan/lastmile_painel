@@ -28,7 +28,7 @@ export interface ParamsPedido {
 
 export interface ResponseGetPedidos {
   pedidos: Pedido[]
-  count: number
+  total: number
 }
 
 export interface ResponseGetPedido {

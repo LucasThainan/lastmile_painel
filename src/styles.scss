@@ -18,11 +18,7 @@ body {
 }
 
 body {
-  background: linear-gradient(125deg,
-      rgba($color: v.$background-color, $alpha: 0),
-      rgba($color: v.$background-color, $alpha: .7) 15%,
-      rgba($color: v.$gray-color, $alpha: 1) 100%,
-    );
+  background-color: v.$background-color;
 }
 
 a {
@@ -54,11 +50,11 @@ ul {
 }
 
 ::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 6px rgba(255, 255, 255, .3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
   border: 4px solid transparent;
   border-radius: 100px;
 
   &:hover {
-    box-shadow: inset 0 0 10px rgba(255, 255, 255, .6);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, .6);
   }
 }

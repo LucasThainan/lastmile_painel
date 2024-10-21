@@ -1,0 +1,62 @@
+<section class="pedidos">
+  <div class="pedidos-wrapper center-div">
+    <div class="title-wrapper">
+      <h1>Pedidos</h1>
+      <span></span>
+    </div>
+    <div class="table-wrapper">
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="sm">Id</th>
+              <th>Pedido</th>
+              <th>Entregador</th>
+              <th class="sm center">Status</th>
+              <th class="md"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of pedidos">
+              <td class="id">{{ item.id_pedido }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.entregador?.name || 'Sem entregador' }}</td>
+              <td>
+                <span class="status" [ngClass]="{
+                  'pendente': item.status_pedido == 1,
+                  'em-rota': item.status_pedido == 2,
+                  'entregue': item.status_pedido == 3
+                }">
+                  {{ getStatus(item.status_pedido) }}
+                </span>
+              </td>
+              <td>
+                <button (click)="cancelarPedido(item)">
+                  cancelar pedido
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-empty" *ngIf="!pedidos.length">
+          <span>Sem Pedidos</span>
+        </div>
+      </div>
+      <div class="paginator">
+        <span>
+          {{ total > 0 ? offset + 1 : '0' }} -
+          {{ total < offset + 10 ? total : offset + 10 }}
+          de {{ total }}
+        </span>
+
+        <button (click)="previousPage()" [disabled]="currentPage <= 1">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <button (click)="nextPage()" [disabled]="currentPage >= totalPages">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

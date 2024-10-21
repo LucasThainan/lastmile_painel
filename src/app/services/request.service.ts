@@ -12,8 +12,7 @@ export class RequestService {
   private getHeaders() {
     const token = Security.getToken()
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
-    // if (token) headers = headers.set('x-access-token', token)
-    if (token) headers = headers.set('bearer', token)
+    if (token) headers = headers.set('Authorization', `Bearer ${token}`)
     return headers
   }
 

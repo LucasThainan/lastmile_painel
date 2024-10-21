@@ -42,7 +42,7 @@ export interface ResponseRefreshToken {
 
 export interface ResponseGetUsers {
   users: User[]
-  count: number
+  total: number
 }
 
 export interface ResponseGetUser {

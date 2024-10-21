@@ -1,0 +1,180 @@
+@use '../../utils/variables' as v;
+
+section.pedidos {
+  min-height: 700px;
+  height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+}
+
+.pedidos-wrapper {
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title-wrapper {
+  padding-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  h1 {
+    margin-left: 16px;
+  }
+
+  span {
+    width: 100%;
+    height: 2px;
+    display: block;
+    border-bottom-right-radius: 100%;
+    background-color: v.$primary-color;
+  }
+}
+
+.table-container {
+  width: 100%;
+  height: 480px;
+  overflow-x: auto;
+
+  table {
+    width: 100%;
+    min-width: 700px;
+    table-layout: fixed;
+    border-collapse: collapse;
+
+    thead {
+      background-color: v.$background-color;
+      position: sticky;
+      top: 0;
+
+      th {
+        padding: 8px;
+        text-align: start;
+        color: v.$primary-color;
+        border-bottom: 1px solid v.$gray-color;
+        font-weight: 600;
+        user-select: none;
+        -ms-user-select: none;
+
+        &.center {
+          text-align: center;
+        }
+
+        &.sm {
+          width: 120px;
+        }
+
+        &.md {
+          width: 160px;
+        }
+      }
+    }
+
+    tbody {
+      td {
+        padding: 9px 6px;
+        text-align: start;
+        color: v.$text-color;
+        border-bottom: 1px solid v.$gray-color;
+        font-weight: 400;
+        font-size: 14px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+
+        span.status {
+          width: 85px;
+          height: 25px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto;
+          border-radius: 8px;
+          color: v.$white-color;
+          background-color: v.$gray-color;
+          line-height: normal;
+          font-size: 12px;
+          user-select: none;
+          -ms-user-select: none;
+        
+          &.pendente {
+            background-color: v.$alert-color;
+          }
+        
+          &.em-rota {
+            background-color: v.$warning-color;
+          }
+        
+          &.entregue {
+            background-color: v.$success-color;
+          }
+        }
+
+        button {
+          display: block;
+          margin: 0 auto;
+
+          border: none;
+          margin-right: 5px;
+          color: v.$primary-color;
+          background-color: transparent;
+          font-weight: 700;
+          font-size: 12px;
+          user-select: none;
+          -ms-user-select: none;
+  
+          &:active {
+            scale: 0.95;
+          }
+        }
+      }
+    }
+  }
+
+  .table-empty {
+    width: 100%;
+    height: calc(100% - 45px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    span {
+      padding: 12px;
+      font-weight: 500;
+    }
+  }
+}
+
+.paginator {
+  width: 100%;
+  height: 45px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-bottom: 1px solid v.$gray-color;
+  -ms-user-select: none;
+  user-select: none;
+  gap: 16px;
+
+  span {
+    margin: 0 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: v.$text-color;
+  }
+
+  button {
+    padding: 6px 12px;
+    border: none;
+    background-color: transparent;
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: .5;
+    }
+  }
+}
