@@ -36,7 +36,7 @@
             [class.invalid]="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched">
         </div>
         <div class="submit-wrap">
-          <button type="button" (click)="onSignupSubmit()" [disabled]="signupForm.invalid">Registrar</button>
+          <button type="submit" (click)="onSignupSubmit()" [disabled]="signupForm.invalid">Registrar</button>
           <a [routerLink]="'/login'">Já possuo conta</a>
         </div>
         <div class="details-wrap" *ngIf="isLoading || error">

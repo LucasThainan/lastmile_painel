@@ -1,0 +1,26 @@
+<header [class.active]="openNav">
+  <div class="header-wrap">
+    <div class="mobile-btn">
+      <button [class.active]="openNav" (click)="openNav = !openNav">
+        <span></span>
+      </button>
+    </div>
+    <nav class="nav-wrapper">
+      <ul>
+        <li *ngFor="let item of links">
+          <a [routerLink]="[item.url]" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{ exact: true }" (click)="checkRoute($event)">
+            {{item.name}}
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="logout-wrapper">
+      <div class="logout-btn">
+        <button (click)="logout()">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
