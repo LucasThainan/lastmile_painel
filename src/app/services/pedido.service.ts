@@ -12,7 +12,7 @@ import { environment } from '../../environments/environments'
 
 @Injectable({ providedIn: 'root' })
 export class PedidoService {
-  apiUrl = environment.apiUrl
+  apiUrl = environment.base_url
 
   constructor(private requestService: RequestService) { }
 

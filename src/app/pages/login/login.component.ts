@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { LoaderComponent } from '../../components/loader/loader.component'
 import { Security } from '../../utils/security.utils'
 import { User } from '../../models/user.model'
-import { UserService } from '../../services'
+import { LoginService } from '../../services'
 
 @Component({
   selector: 'app-login',
@@ -22,7 +22,7 @@ export class LoginComponent {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly userService: UserService,
+    private readonly loginService: LoginService,
     private readonly router: Router
   ) {
     this.loginForm = this.formBuilder.group({
@@ -35,7 +35,7 @@ export class LoginComponent {
     if (this.loginForm.invalid) return
     this.isLoading = true
 
-    this.userService.login(this.loginForm.value).subscribe({
+    this.loginService.login(this.loginForm.value).subscribe({
       next: (res: any) => {
         this.isLoading = false
         this.setUser(res.user_data, res.access_token, res.refresh_token)

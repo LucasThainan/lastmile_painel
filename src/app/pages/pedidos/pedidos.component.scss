@@ -128,6 +128,15 @@ section.pedidos {
           &:active {
             scale: 0.95;
           }
+
+          &:disabled {
+            color: v.$gray-color;
+            cursor: not-allowed;
+
+            &:active {
+              scale: unset;
+            }
+          }
         }
       }
     }

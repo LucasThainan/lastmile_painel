@@ -2,44 +2,33 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import {
   User,
-  Login,
-  RefreshToken,
   ParamsUsers,
   ResponseLogin,
-  ResponseRefreshToken,
   ResponseGetUsers,
-  ResponseGetUser,
+  ResponseGetUser
 } from '../models/user.model'
 import { RequestService } from './request.service'
 import { environment } from '../../environments/environments'
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  apiUrl = environment.apiUrl
+  base_url = environment.base_url
 
   constructor(private requestService: RequestService) { }
 
-  login(data: Login): Observable<ResponseLogin> {
-    return this.requestService.postRequest(`${this.apiUrl}usuarios/login`, data)
-  }
-
-  refreshToken(data: RefreshToken): Observable<ResponseRefreshToken> {
-    return this.requestService.postRequest(`${this.apiUrl}usuarios/refresh-token`, data)
-  }
-
   createUser(data: Partial<User>): Observable<ResponseLogin> {
-    return this.requestService.postRequest(`${this.apiUrl}usuarios`, data)
+    return this.requestService.postRequest(`${this.base_url}usuarios`, data)
   }
 
   getUsers(data: ParamsUsers): Observable<ResponseGetUsers> {
-    return this.requestService.getRequest(`${this.apiUrl}usuarios`, data)
+    return this.requestService.getRequest(`${this.base_url}usuarios`, data)
   }
 
   getUserID(id: string): Observable<ResponseGetUser> {
-    return this.requestService.getRequest(`${this.apiUrl}usuarios/${id}`, {})
+    return this.requestService.getRequest(`${this.base_url}usuarios/${id}`, {})
   }
 
   updateUsers(data: Partial<User>): Observable<ResponseGetUser> {
-    return this.requestService.patchRequest(`${this.apiUrl}usuarios`, data)
+    return this.requestService.patchRequest(`${this.base_url}usuarios`, data)
   }
 }

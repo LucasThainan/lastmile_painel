@@ -38,6 +38,14 @@ export class Security {
     return ''
   }
 
+  public static getRefreshToken(): string {
+    const token = localStorage.getItem('refresh_token')
+
+    if (token) return token
+
+    return ''
+  }
+
   public static hasToken(): boolean {
     if (this.getToken()) return true
     return false

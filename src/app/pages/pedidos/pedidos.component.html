@@ -31,7 +31,7 @@
                 </span>
               </td>
               <td>
-                <button (click)="cancelarPedido(item)">
+                <button [disabled]="item.status_pedido !== 1" (click)="cancelarPedido(item)">
                   cancelar pedido
                 </button>
               </td>
