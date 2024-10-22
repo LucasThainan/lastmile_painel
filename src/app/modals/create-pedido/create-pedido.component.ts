@@ -93,7 +93,7 @@ export class CreatePedidoComponent {
       address: this.pedidoForm.controls['address'].value,
       city: this.pedidoForm.controls['city'].value,
       state: this.pedidoForm.controls['state'].value,
-      number: this.pedidoForm.controls['number'].value,
+      number: String(this.pedidoForm.controls['number'].value),
       postal_code: this.pedidoForm.controls['postal_code'].value,
       status_pedido: 1
     }

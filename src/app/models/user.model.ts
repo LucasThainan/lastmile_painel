@@ -12,6 +12,7 @@ export interface User {
   updatedAt?: string
   status_usuario: number
   entregador?: Partial<Entregador>
+  cod_entregador?: string
 }
 
 export interface Login {

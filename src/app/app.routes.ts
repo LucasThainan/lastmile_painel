@@ -2,6 +2,8 @@ import { Routes } from '@angular/router'
 
 import { AuthGuard } from './guard/auth-guard.component'
 import { LayoutComponent } from './components/layout/layout.component'
+import { ClientGuard } from './guard/client-guard.component'
+import { EntregadorGuard } from './guard/entregador-guard.component'
 
 export const routes: Routes = [
   {
@@ -15,7 +17,13 @@ export const routes: Routes = [
       },
       {
         path: 'pedidos',
+        canActivate: [ClientGuard],
         loadComponent: () => import('./pages/pedidos/pedidos.component').then(m => m.PedidosComponent)
+      },
+      {
+        path: 'entregas',
+        canActivate: [EntregadorGuard],
+        loadComponent: () => import('./pages/entregador-pedidos/entregador-pedidos.component').then(m => m.EntregadorPedidosComponent)
       }
     ]
   },

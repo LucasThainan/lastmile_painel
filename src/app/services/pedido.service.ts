@@ -33,6 +33,6 @@ export class PedidoService {
   }
 
   AssignEntregador(id: string, data: AssignEntregador): Observable<ResponseGetPedido> {
-    return this.requestService.patchRequest(`${this.apiUrl}pedidos/${id}`, data)
+    return this.requestService.patchRequest(`${this.apiUrl}pedidos/assign-entregador/${id}`, data)
   }
 }

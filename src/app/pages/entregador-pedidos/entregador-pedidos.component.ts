@@ -5,20 +5,20 @@ import { Pedido } from '../../models/pedido.model'
 import { Security } from '../../utils/security.utils'
 import { PedidoService, SocketService } from '../../services'
 import { StatusPedidoEnum } from '../../enums/status-pedido.enum'
-import { CreatePedidoComponent } from "../../modals/create-pedido/create-pedido.component"
 import { ConfirmMessageComponent } from "../../modals/confirm-message/confirm-message.component"
 
 @Component({
-  selector: 'app-pedidos',
+  selector: 'app-entregador-pedidos',
   standalone: true,
-  imports: [CommonModule, CreatePedidoComponent, ConfirmMessageComponent],
-  templateUrl: './pedidos.component.html',
-  styleUrl: './pedidos.component.scss'
+  imports: [CommonModule, ConfirmMessageComponent],
+  templateUrl: './entregador-pedidos.component.html',
+  styleUrl: './entregador-pedidos.component.scss'
 })
-export class PedidosComponent {
+export class EntregadorPedidosComponent {
+  user!: User
   pedidos: any[] = []
   selectedPedido!: Pedido | null
-  user!: User
+  statusPedido!: number
 
   offset: number = 0
   limit: number = 10
@@ -26,20 +26,18 @@ export class PedidosComponent {
   totalPages: number = 0
   total: number = 0
 
-  showModalPedido: boolean = false
   showModalConfirm: boolean = false
 
   constructor(
     private readonly socketService: SocketService,
     private readonly pedidoService: PedidoService
   ) {
+    this.socketService.on('pedido_created', (res) => {
+      this.getPedidos()
+    })
+
     this.socketService.on('pedido_status_updated', (res) => {
-      this.pedidos.forEach((pedido) => {
-        if (pedido.id_pedido === res.id_pedido) {
-          pedido.entregador = res.entregador
-          pedido.status_pedido = res.status_pedido
-        }
-      })
+      this.getPedidos()
     })
   }
 
@@ -52,7 +50,7 @@ export class PedidosComponent {
     const params = {
       limit: this.limit,
       offset: this.offset,
-      cod_user: this.user.id_usuario
+      cod_entregador: this.user.cod_entregador
     }
 
     this.pedidoService.getPedidos(params).subscribe({
@@ -69,11 +67,22 @@ export class PedidosComponent {
     return StatusPedidoEnum[status]
   }
 
-  cancelarPedido() {
+  iniciarEntrega() {
     if (!this.selectedPedido) return
 
-    const data = { status_pedido: StatusPedidoEnum.Cancelado }
-    
+    const data = { cod_entregador: this.user.cod_entregador || '' }
+
+    this.pedidoService.AssignEntregador(this.selectedPedido.id_pedido, data).subscribe({
+      next: () => this.getPedidos(),
+      error: (err) => console.log(err)
+    })
+  }
+
+  confirmarEntrega() {
+    if (!this.selectedPedido) return
+
+    const data = { status_pedido: StatusPedidoEnum.Entregue }
+
     this.pedidoService.updatePedidos(this.selectedPedido.id_pedido, data).subscribe({
       next: () => this.getPedidos(),
       error: (err) => console.log(err)
@@ -96,24 +105,18 @@ export class PedidosComponent {
     this.getPedidos()
   }
 
-  openModalPedido() {
-    this.showModalPedido = true
-  }
-
-  closeModalPedido(event: any) {
-    if (event) this.getPedidos()
-    this.showModalPedido = false
-  }
-
-  openModalConfirm(pedido: Pedido) {
-    if (pedido.status_pedido !== StatusPedidoEnum.Pendente) return
-
-    this.showModalConfirm = true
+  openModalConfirm(pedido: Pedido, status: number) {
+    this.statusPedido = status
     this.selectedPedido = pedido
+    this.showModalConfirm = true
   }
 
   closeModalConfirm(event: any) {
-    if (event) this.cancelarPedido()
+    if (event) {
+      this.statusPedido == 2
+        ? this.iniciarEntrega()
+        : this.confirmarEntrega()
+    }
     this.showModalConfirm = false
   }
 }
