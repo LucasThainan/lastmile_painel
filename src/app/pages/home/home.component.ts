@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
+import { MapsComponent } from '../../components/maps/maps.component'
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [MapsComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
-
-}
+export class HomeComponent { }

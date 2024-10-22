@@ -1,0 +1,15 @@
+@use '../../utils/variables' as v;
+
+section.home {
+  min-height: 700px;
+  height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+}
+
+.home-wrapper {
+  padding: 16px 8px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}

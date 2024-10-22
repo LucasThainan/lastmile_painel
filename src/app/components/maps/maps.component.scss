@@ -1,0 +1,46 @@
+@use '../../utils/variables' as v;
+
+.map-wrapper {
+  position: relative;
+}
+
+#map {
+  width: calc(100vw - 32px);
+  height: 750px;
+  display: block;
+}
+
+.map-pill {
+  width: 250px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  margin: 12px;
+  padding: 12px;
+  border-radius: 15px;
+  background-color: v.$white-color;
+  box-shadow: 0 0 20px -1px rgba(0, 0, 0, .3);
+  user-select: none;
+
+  .youps-pill-content {
+    .youps-pill-label {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .youps-pill-distance-time {
+      margin-top: 4px;
+      color: v.$gray-color;
+      font-size: 14px;
+    }
+  }
+}
+
+@media (max-height: 850px) {
+  #map {
+    height: 650px;
+  }
+}

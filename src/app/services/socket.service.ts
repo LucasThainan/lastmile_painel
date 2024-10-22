@@ -32,6 +32,10 @@ export class SocketService {
     this.socket.on(eventName, callback)
   }
 
+  getId() {
+    return this.socket.id
+  }
+
   disconnect(): void {
     if (this.socket) this.socket.disconnect()
   }
